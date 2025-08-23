@@ -1,0 +1,4 @@
+/home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/build/CMakeFiles/quaternion_lib.dir
+/home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/build/CMakeFiles/test1.dir
+/home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/build/CMakeFiles/edit_cache.dir
+/home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/build/CMakeFiles/rebuild_cache.dir

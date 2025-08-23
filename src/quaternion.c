@@ -1,4 +1,4 @@
-#include "quaternions.h"
+#include "quaternion.h"
 #include <math.h>  
 
 void quatMul(const struct quaternion* q1, const struct quaternion* q2, struct quaternion* result) {
@@ -39,13 +39,13 @@ float norm(const struct quaternion* q) {
 
 void pureQuat(const float vec[3], struct quaternion* result){
   result->w = 0;
-  result->x = vec;
+  result->x = vec[0];
   result->y = vec[1];
   result->z = vec[2];
 }
 
 void vecFromQuat(const struct quaternion* q, float result[3]){
-  result = q->x;
+  result[0] = q->x;
   result[1] = q->y;
   result[2] = q->z;
 }

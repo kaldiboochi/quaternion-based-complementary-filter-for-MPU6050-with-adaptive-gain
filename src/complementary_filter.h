@@ -2,7 +2,7 @@
 #ifndef COMPLEMENTARY_FILTER_H
 #define COMPLEMENTARY_FILTER_H
 
-#include "quaternions.h"
+#include "quaternion.h"
 #include <math.h>
 
 #define TH1 0.1f
