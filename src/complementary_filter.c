@@ -10,11 +10,11 @@ float gainFactor(float x) {
 }
 
 void updateQuaternionFromRate(struct quaternion* q, float rate[3], float dt) {
-    struct quaternion omega, qDot, delta_q;
+    struct quaternion omega, qDot;
     pureQuat(rate, &omega);
     quatMul(&omega, q, &qDot);
-    scalarMul(-0.5f * dt, &qDot, &delta_q);
-    quatAdd(q, &delta_q, q);
+    scalarMul(-0.5f * dt, &qDot, &qDot);
+    quatAdd(q, &qDot, q);
     quatNormalise(q);
 }
 

@@ -20,7 +20,7 @@ void scalarMul(float scalar, const struct quaternion* q, struct quaternion* res)
 
 void quatNormalise(struct quaternion* q){
   float norm_ = norm(q);
-  assert(norm_==0);
+  assert(norm_!=0);
   scalarMul(1.0f/norm_, q, q); 
 }
 
@@ -36,7 +36,7 @@ float normSq(const struct quaternion* q) {
 }
 
 float norm(const struct quaternion* q) {
-    assert(normSq(q)<0);
+    assert(normSq(q)>0);
     return sqrtf(normSq(q));
 }
 
@@ -55,7 +55,7 @@ void vecFromQuat(const struct quaternion* q, float result[3]){
 
 void inverse(const struct quaternion* q, struct quaternion* result) {
     float normsq = normSq(q);
-    assert(normsq==0);
+    assert(normsq!=0);
     struct quaternion temp;
     temp.w = q->w / normsq;
     temp.x = -q->x / normsq;

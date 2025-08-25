@@ -125,5 +125,6 @@ while (True):
         frontArrow.length=4
         upArrow.length=1
     except KeyboardInterrupt:
+        ser.close()
         break
         
