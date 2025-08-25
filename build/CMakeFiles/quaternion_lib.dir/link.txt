@@ -1,2 +1,0 @@
-/usr/bin/ar qc libquaternion_lib.a CMakeFiles/quaternion_lib.dir/src/quaternion.c.o CMakeFiles/quaternion_lib.dir/src/complementary_filter.c.o
-/usr/bin/ranlib libquaternion_lib.a

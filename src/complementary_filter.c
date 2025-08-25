@@ -19,33 +19,39 @@ void updateQuaternionFromRate(struct quaternion* q, float rate[3], float dt) {
 }
 
 void updateQuaternionFromAcc(struct quaternion* q, float acc[3]) {
-    struct quaternion qInv, delta_acc, A, B;
+    struct quaternion qGL, delta_acc, A, B;
     float g_p[3];
-
-    inverse(q, &qInv);
-    quatrotate(&qInv, acc, g_p);
-
+    inverse(q,&qGL);
+    quatrotate(&qGL, acc, g_p);
+    if (g_p[2]<-1.0f) return;
     delta_acc.w = sqrtf((g_p[2] + 1.0f) * 0.5f);
     float inv = 1.0f / sqrtf((g_p[2] + 1.0f) * 2.0f);
     delta_acc.x = -g_p[1] * inv;
     delta_acc.y = g_p[0] * inv;
     delta_acc.z = 0.0f;
-
+    quatNormalise(&delta_acc);
     float eps = quatDot(&delta_acc, &identity_quaternion);
     if (eps >= 0.9f) {
+        float alpha2 = 0.1;
+        scalarMul( 1.0f - alpha2, &identity_quaternion, &A);
+        scalarMul(alpha2, &delta_acc, &B);
+        quatAdd(&A, &B, &delta_acc);
         quatNormalise(&delta_acc);
     } else {
         float mag = sqrtf(acc[0]*acc[0] + acc[1]*acc[1] + acc[2]*acc[2]);
+        
         float g_ref = 9.807f;
         float em = fabsf(mag - g_ref) / g_ref;
-        float alpha = gainFactor(em);
-        scalarMul(1.0f - alpha, &identity_quaternion, &A);
+        printf("error magnitude %.6f \n",em);
+        float alpha = gainFactor(em)*0.1;
+        scalarMul( 1.0f-alpha, &identity_quaternion, &A);
         scalarMul(alpha, &delta_acc, &B);
         quatAdd(&A, &B, &delta_acc);
         quatNormalise(&delta_acc);
     }
 
     quatMul( q,&delta_acc, q);
+
     quatNormalise(q);
 }
 

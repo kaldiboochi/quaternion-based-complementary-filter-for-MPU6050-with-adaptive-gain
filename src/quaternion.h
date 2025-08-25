@@ -1,7 +1,28 @@
 #ifndef QUATERNIONS_H
 #define QUATERNIONS_H
-
+#include <assert.h>
+#include <stdlib.h>
 #include <math.h>
+
+/**
+ * @brief custom ASSERT for debugging things 
+ * @param cond condition which should be expected if not the assertion will be invoked
+ * for example the norm squared should always be positive so the cond will be (normSq>0)
+ * @param fmt format string as usual printf input so that we know what went wrong!!!
+ */
+#define ASSERT_MSG(cond, fmt, ...) \
+    do { \
+        if (!(cond)) { \
+            printf("🔥 ASSERTION FAILED 🔥\n"); \
+            printf("Condition: %s\n", #cond); \
+            printf("File: %s:%d\n", __FILE__, __LINE__); \
+            printf("Function: %s\n", __func__); \
+            printf("Message: " fmt "\n", ##__VA_ARGS__); \
+            printf("Values:\n"); \
+            abort(); \
+        } \
+    } while(0)
+    
 
 /**
  * @brief Quaternion structure
@@ -14,6 +35,12 @@ struct quaternion {
     float y;  // j component (vector part)
     float z;  // k component (vector part)
 };
+/**
+ * @brief Print quaternion for debugging process
+ * 
+ * @param q quaternion to print
+ */
+void quatPrint(const struct quaternion* q);
 
 /**
  * @brief Multiply two quaternions

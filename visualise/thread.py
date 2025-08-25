@@ -30,14 +30,22 @@ def data_printer():
             line = data_queue.get()  # Blocks until there is data
             values = [float(x) for x in line.split(',')]
             if len(values)==6:
+                
                 current_time = time.time()
                 dt = current_time - last_time
                 last_time = current_time
+                accel_val = values[:3]
+                
                 gyro = values[3:]
+                
+                print(gyro,accel_val)
                 gyro_rates = (ctypes.c_float * 3)(gyro[0], gyro[1], gyro[2])
+                acc = (ctypes.c_float * 3)(accel_val[0], accel_val[1], accel_val[2])
                 ctype_bypass.qlib.updateQuaternionFromRate(ctypes.byref(q), gyro_rates, dt)
+                ctype_bypass.qlib.updateQuaternionFromAcc(ctypes.byref(q), acc)
                 quaternion_que.put([q.w , q.x , q.y , q.z])
-                print([q.w , q.x , q.y , q.z])
+                #print([q.w , q.x , q.y , q.z])
+                
         except Exception as e:
             print(f"Error printing data: {e}")
 import numpy as np
@@ -89,9 +97,9 @@ def main():
             q2=q[2]
             q3=q[3]
 
-            roll=-math.atan2(2*(q0*q1+q2*q3),1-2*(q1*q1+q2*q2))
-            pitch=math.asin(2*(q0*q2-q3*q1))
-            yaw=-math.atan2(2*(q0*q3+q1*q2),1-2*(q2*q2+q3*q3))-np.pi/2
+            pitch=-math.atan2(2*(q0*q1+q2*q3),1-2*(q1*q1+q2*q2))
+            roll=math.asin(2*(q0*q2-q3*q1))
+            yaw=math.atan2(2*(q0*q3+q1*q2),1-2*(q2*q2+q3*q3))+np.pi/2
             k=vector(cos(yaw)*cos(pitch), sin(pitch),sin(yaw)*cos(pitch))
             y=vector(0,1,0)
             s=cross(k,y)

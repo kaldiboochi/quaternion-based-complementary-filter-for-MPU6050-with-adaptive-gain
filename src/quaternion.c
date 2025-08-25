@@ -1,6 +1,10 @@
 #include "quaternion.h"
-#include <assert.h>
 #include <math.h>  
+
+    
+void quatPrint(const struct quaternion* q){
+    printf("quaternion values: w:%.6f x:%.6f y:%.6f z:%.6f \n",q->w,q->x,q->y,q->z);
+}
 
 void quatMul(const struct quaternion* q2, const struct quaternion* q1, struct quaternion* result) {
     struct quaternion temp;
@@ -36,7 +40,7 @@ float normSq(const struct quaternion* q) {
 }
 
 float norm(const struct quaternion* q) {
-    assert(normSq(q)>0);
+    ASSERT_MSG(normSq(q)>0, "norm squared =%.6f  quaternion values: w:%.6f x:%.6f y:%.6f z:%.6f \n",normSq(q),q->w,q->x,q->y,q->z);
     return sqrtf(normSq(q));
 }
 
