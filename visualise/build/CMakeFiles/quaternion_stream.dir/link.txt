@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/quaternion_stream.dir/dummy_stream.c.o -o quaternion_stream  libquaternion_lib.a -lm 

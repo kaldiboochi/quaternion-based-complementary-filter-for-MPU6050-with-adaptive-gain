@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/real_imu_stream.dir/real_imu_stream.c.o -o real_imu_stream  libquaternion_lib.a -lm 

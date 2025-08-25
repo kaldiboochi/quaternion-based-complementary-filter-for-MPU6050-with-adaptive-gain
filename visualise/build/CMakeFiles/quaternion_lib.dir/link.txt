@@ -1,0 +1,2 @@
+/usr/bin/ar qc libquaternion_lib.a "CMakeFiles/quaternion_lib.dir/home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/src/quaternion.c.o" "CMakeFiles/quaternion_lib.dir/home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/src/complementary_filter.c.o"
+/usr/bin/ranlib libquaternion_lib.a
