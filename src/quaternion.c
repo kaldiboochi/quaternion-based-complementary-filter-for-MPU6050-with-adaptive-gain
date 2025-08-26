@@ -1,88 +1,65 @@
 #include "quaternion.h"
-#include <math.h>  
 
-    
-void quatPrint(const struct quaternion* q){
-    printf("quaternion values: w:%.6f x:%.6f y:%.6f z:%.6f \n",q->w,q->x,q->y,q->z);
+void quat_print(const struct quaternion* q) {
+    printf("q: w=%.6f x=%.6f y=%.6f z=%.6f\n", q->w, q->x, q->y, q->z);
 }
 
-void quatMul(const struct quaternion* q2, const struct quaternion* q1, struct quaternion* result) {
-    struct quaternion temp;
-    temp.w = q1->w * q2->w - q1->x * q2->x - q1->y * q2->y - q1->z * q2->z;
-    temp.x = q1->w * q2->x + q1->x * q2->w - q1->y * q2->z + q1->z * q2->y;
-    temp.y = q1->w * q2->y + q1->x * q2->z + q1->y * q2->w - q1->z * q2->x;
-    temp.z = q1->w * q2->z - q1->x * q2->y + q1->y * q2->x + q1->z * q2->w;
-    *result = temp;
+void quat_multiply(const struct quaternion* q1, const struct quaternion* q2, struct quaternion* r) {
+    struct quaternion t;
+    t.w = q1->w*q2->w - q1->x*q2->x - q1->y*q2->y - q1->z*q2->z;
+    t.x = q1->w*q2->x + q1->x*q2->w + q1->y*q2->z - q1->z*q2->y;
+    t.y = q1->w*q2->y - q1->x*q2->z + q1->y*q2->w + q1->z*q2->x;
+    t.z = q1->w*q2->z + q1->x*q2->y - q1->y*q2->x + q1->z*q2->w;
+    *r = t;
 }
 
-void scalarMul(float scalar, const struct quaternion* q, struct quaternion* res){
-  res->w = q->w * scalar;
-  res->x = q->x * scalar;
-  res->y = q->y * scalar;
-  res->z = q->z * scalar;
+void quat_scale(float s, const struct quaternion* q, struct quaternion* r) {
+    r->w = q->w * s; r->x = q->x * s;
+    r->y = q->y * s; r->z = q->z * s;
 }
 
-void quatNormalise(struct quaternion* q){
-  float norm_ = norm(q);
-  assert(norm_!=0);
-  scalarMul(1.0f/norm_, q, q); 
+float quat_norm_sq(const struct quaternion* q) {
+    return q->w*q->w + q->x*q->x + q->y*q->y + q->z*q->z;
 }
 
-void quatAdd(const struct quaternion* q1, const struct quaternion* q2, struct quaternion* q3){
-  q3->w = q1->w + q2->w;
-  q3->x = q1->x + q2->x;
-  q3->y = q1->y + q2->y;
-  q3->z = q1->z + q2->z;
+float quat_norm(const struct quaternion* q) {
+    float ns = quat_norm_sq(q);
+    QUAT_ASSERT(ns >= 0, "norm_sq=%.6f", ns);
+    return sqrtf(ns);
 }
 
-float normSq(const struct quaternion* q) {
-    return q->w * q->w + q->x * q->x + q->y * q->y + q->z * q->z;
+void quat_normalize(struct quaternion* q) {
+    float n = quat_norm(q);
+    QUAT_ASSERT(n > 0, "norm=%.6f", n);
+    quat_scale(1.0f / n, q, q);
 }
 
-float norm(const struct quaternion* q) {
-    ASSERT_MSG(normSq(q)>0, "norm squared =%.6f  quaternion values: w:%.6f x:%.6f y:%.6f z:%.6f \n",normSq(q),q->w,q->x,q->y,q->z);
-    return sqrtf(normSq(q));
+void quat_add(const struct quaternion* a, const struct quaternion* b, struct quaternion* r) {
+    r->w = a->w + b->w; r->x = a->x + b->x;
+    r->y = a->y + b->y; r->z = a->z + b->z;
 }
 
-void pureQuat(const float vec[3], struct quaternion* result){
-  result->w = 0;
-  result->x = vec[0];
-  result->y = vec[1];
-  result->z = vec[2];
+void quat_from_vec(const float v[3], struct quaternion* q) {
+    q->w = 0; q->x = v[0]; q->y = v[1]; q->z = v[2];
 }
 
-void vecFromQuat(const struct quaternion* q, float result[3]){
-  result[0] = q->x;
-  result[1] = q->y;
-  result[2] = q->z;
+void quat_inverse(const struct quaternion* q, struct quaternion* r) {
+    float ns = quat_norm_sq(q);
+    QUAT_ASSERT(ns > 0, "norm_sq=%.6f", ns);
+    r->w =  q->w / ns; r->x = -q->x / ns;
+    r->y = -q->y / ns; r->z = -q->z / ns;
 }
 
-void inverse(const struct quaternion* q, struct quaternion* result) {
-    float normsq = normSq(q);
-    assert(normsq!=0);
-    struct quaternion temp;
-    temp.w = q->w / normsq;
-    temp.x = -q->x / normsq;
-    temp.y = -q->y / normsq;
-    temp.z = -q->z / normsq;
-    *result = temp;
+void quat_rotate(const struct quaternion* q, const float v[3], float out[3]) {
+    struct quaternion p, t, inv, res;
+    quat_from_vec(v, &p);
+    quat_inverse(q, &inv);
+    quat_multiply(q, &p, &t);
+    quat_multiply(&t, &inv, &res);
+    out[0] = res.x; out[1] = res.y; out[2] = res.z;
 }
 
-void quatrotate(const struct quaternion* q, float vector[3], float rotated[3]) {
-    struct quaternion vector_quaternion;
-    pureQuat(vector, &vector_quaternion);
-
-    struct quaternion rotated_vector_quaternion;
-    struct quaternion qInv;
-    inverse(q, &qInv);
-
-    struct quaternion temp;
-    quatMul(q, &vector_quaternion, &temp);
-    quatMul(&temp, &qInv, &rotated_vector_quaternion);
-    vecFromQuat(&rotated_vector_quaternion, rotated);
-}
-
-float quatDot(const struct quaternion* q1, const struct quaternion* q2){
-  return q1->w * q2->w + q1->x * q2->x + q1->y * q2->y + q1->z * q2->z;
+float quat_dot(const struct quaternion* a, const struct quaternion* b) {
+    return a->w*b->w + a->x*b->x + a->y*b->y + a->z*b->z;
 }
 

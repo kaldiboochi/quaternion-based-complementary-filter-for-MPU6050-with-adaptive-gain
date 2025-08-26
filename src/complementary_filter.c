@@ -1,57 +1,47 @@
-// complementary_filter.c
-
 #include "complementary_filter.h"
-#include <math.h>
+#include <stdio.h>
 
-float gainFactor(float x) {
-    if (x <= TH1) return 1.0f;
-    if (x >= TH2) return 0.0f;
-    return (TH2 - x) / TH1;
+float cf_gain(float err) {
+    if (err <= CF_TH1) return 1.0f;
+    if (err >= CF_TH2) return 0.0f;
+    return (CF_TH2 - err) / CF_TH1;
 }
 
-void updateQuaternionFromRate(struct quaternion* q, float rate[3], float dt) {
-    struct quaternion omega, qDot;
-    pureQuat(rate, &omega);
-    quatMul(&omega, q, &qDot);
-    scalarMul(-0.5f * dt, &qDot, &qDot);
-    quatAdd(q, &qDot, q);
-    quatNormalise(q);
+void cf_update_from_gyro(struct quaternion* q, float r[3], float dt) {
+    struct quaternion w, qd;
+    quat_from_vec(r, &w);
+    quat_multiply(&w, q, &qd);
+    quat_scale(-0.5f*dt, &qd, &qd);
+    quat_add(q, &qd, q);
+    quat_normalize(q);
 }
 
-void updateQuaternionFromAcc(struct quaternion* q, float acc[3]) {
-    struct quaternion qGL, delta_acc, A, B;
-    float g_p[3];
-    inverse(q,&qGL);
-    quatrotate(&qGL, acc, g_p);
-    if (g_p[2]<-1.0f) return;
-    delta_acc.w = sqrtf((g_p[2] + 1.0f) * 0.5f);
-    float inv = 1.0f / sqrtf((g_p[2] + 1.0f) * 2.0f);
-    delta_acc.x = -g_p[1] * inv;
-    delta_acc.y = g_p[0] * inv;
-    delta_acc.z = 0.0f;
-    quatNormalise(&delta_acc);
-    float eps = quatDot(&delta_acc, &identity_quaternion);
-    if (eps >= 0.9f) {
-        float alpha2 = 0.1;
-        scalarMul( 1.0f - alpha2, &identity_quaternion, &A);
-        scalarMul(alpha2, &delta_acc, &B);
-        quatAdd(&A, &B, &delta_acc);
-        quatNormalise(&delta_acc);
-    } else {
-        float mag = sqrtf(acc[0]*acc[0] + acc[1]*acc[1] + acc[2]*acc[2]);
-        
-        float g_ref = 9.807f;
-        float em = fabsf(mag - g_ref) / g_ref;
-        printf("error magnitude %.6f \n",em);
-        float alpha = gainFactor(em)*0.1;
-        scalarMul( 1.0f-alpha, &identity_quaternion, &A);
-        scalarMul(alpha, &delta_acc, &B);
-        quatAdd(&A, &B, &delta_acc);
-        quatNormalise(&delta_acc);
-    }
+void cf_update_from_accel(struct quaternion* q, float a[3]) {
+    struct quaternion gl, da, A, B;
+    float gp[3];
+    quat_inverse(q, &gl);
+    quat_rotate(&gl, a, gp);
+    if (gp[2] < -1.0f) return;
 
-    quatMul( q,&delta_acc, q);
+    da.w = sqrtf((gp[2]+1)*0.5f);
+    float inv = 1.0f / sqrtf((gp[2]+1)*2.0f);
+    da.x = -gp[1]*inv; da.y = gp[0]*inv; da.z = 0.0f;
+    quat_normalize(&da);
 
-    quatNormalise(q);
+    float eps = quat_dot(&da, &(struct quaternion){1,0,0,0});
+    float alpha = (eps >= 0.9f ? 0.1f : cf_gain(fabsf(sqrtf(a[0]*a[0]+a[1]*a[1]+a[2]*a[2]) - CF_GRAVITY)/CF_GRAVITY)*0.1f);
+
+    quat_scale(1-alpha, &(struct quaternion){1,0,0,0}, &A);
+    quat_scale(alpha, &da, &B);
+    quat_add(&A, &B, &da);
+    quat_normalize(&da);
+
+    quat_multiply(q, &da, q);
+    quat_normalize(q);
+}
+
+void cf_update(struct quaternion* q, float r[3], float a[3], float dt) {
+    cf_update_from_gyro(q, r, dt);
+    cf_update_from_accel(q, a);
 }
 

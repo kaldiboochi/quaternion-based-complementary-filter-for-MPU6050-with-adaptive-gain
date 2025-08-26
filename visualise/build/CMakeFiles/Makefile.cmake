@@ -45,8 +45,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/quaternion_lib.dir/DependInfo.cmake"
-  "CMakeFiles/test1.dir/DependInfo.cmake"
-  "CMakeFiles/quaternion_stream.dir/DependInfo.cmake"
-  "CMakeFiles/real_imu_stream.dir/DependInfo.cmake"
   "CMakeFiles/quaternion_shared.dir/DependInfo.cmake"
   )

@@ -1,7 +1,4 @@
 /home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/visualise/build/CMakeFiles/quaternion_lib.dir
-/home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/visualise/build/CMakeFiles/test1.dir
-/home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/visualise/build/CMakeFiles/quaternion_stream.dir
-/home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/visualise/build/CMakeFiles/real_imu_stream.dir
 /home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/visualise/build/CMakeFiles/quaternion_shared.dir
 /home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/visualise/build/CMakeFiles/edit_cache.dir
 /home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/visualise/build/CMakeFiles/rebuild_cache.dir

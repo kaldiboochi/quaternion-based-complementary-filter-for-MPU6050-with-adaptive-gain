@@ -19,19 +19,6 @@ add_library(quaternion_lib
 # Link math library (for sqrt, fabsf, etc.)
 target_link_libraries(quaternion_lib m)
 
-# Create executable from test file
-add_executable(test1 test1.c)
-
-# Create executable for simulated quaternion streaming
-add_executable(quaternion_stream dummy_stream.c)
-
-# Create executable for real IMU data streaming
-add_executable(real_imu_stream real_imu_stream.c)
-
-# Link the library to executables
-target_link_libraries(test1 quaternion_lib m)
-target_link_libraries(quaternion_stream quaternion_lib m)
-target_link_libraries(real_imu_stream quaternion_lib m)
 
 # Add this to your existing CMakeLists.txt
 add_library(quaternion_shared SHARED
@@ -44,9 +31,6 @@ target_compile_options(quaternion_shared PRIVATE -Wall -Wextra -g -fPIC)
 
 # Optional: Add compiler flags for debugging and warnings
 target_compile_options(quaternion_lib PRIVATE -Wall -Wextra -g)
-target_compile_options(test1 PRIVATE -Wall -Wextra -g)
-target_compile_options(quaternion_stream PRIVATE -Wall -Wextra -g)
-target_compile_options(real_imu_stream PRIVATE -Wall -Wextra -g)
 
 # Optional: Print build information
 message(STATUS "Building quaternion filter library and executables")

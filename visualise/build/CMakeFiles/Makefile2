@@ -64,9 +64,6 @@ CMAKE_BINARY_DIR = /home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based
 
 # The main recursive "all" target.
 all: CMakeFiles/quaternion_lib.dir/all
-all: CMakeFiles/test1.dir/all
-all: CMakeFiles/quaternion_stream.dir/all
-all: CMakeFiles/real_imu_stream.dir/all
 all: CMakeFiles/quaternion_shared.dir/all
 .PHONY : all
 
@@ -76,9 +73,6 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/quaternion_lib.dir/clean
-clean: CMakeFiles/test1.dir/clean
-clean: CMakeFiles/quaternion_stream.dir/clean
-clean: CMakeFiles/real_imu_stream.dir/clean
 clean: CMakeFiles/quaternion_shared.dir/clean
 .PHONY : clean
 
@@ -107,84 +101,6 @@ quaternion_lib: CMakeFiles/quaternion_lib.dir/rule
 CMakeFiles/quaternion_lib.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/quaternion_lib.dir/build.make CMakeFiles/quaternion_lib.dir/clean
 .PHONY : CMakeFiles/quaternion_lib.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/test1.dir
-
-# All Build rule for target.
-CMakeFiles/test1.dir/all: CMakeFiles/quaternion_lib.dir/all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test1.dir/build.make CMakeFiles/test1.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test1.dir/build.make CMakeFiles/test1.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/visualise/build/CMakeFiles --progress-num=11,12 "Built target test1"
-.PHONY : CMakeFiles/test1.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/test1.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/visualise/build/CMakeFiles 5
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test1.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/visualise/build/CMakeFiles 0
-.PHONY : CMakeFiles/test1.dir/rule
-
-# Convenience name for target.
-test1: CMakeFiles/test1.dir/rule
-.PHONY : test1
-
-# clean rule for target.
-CMakeFiles/test1.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test1.dir/build.make CMakeFiles/test1.dir/clean
-.PHONY : CMakeFiles/test1.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/quaternion_stream.dir
-
-# All Build rule for target.
-CMakeFiles/quaternion_stream.dir/all: CMakeFiles/quaternion_lib.dir/all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/quaternion_stream.dir/build.make CMakeFiles/quaternion_stream.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/quaternion_stream.dir/build.make CMakeFiles/quaternion_stream.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/visualise/build/CMakeFiles --progress-num=7,8 "Built target quaternion_stream"
-.PHONY : CMakeFiles/quaternion_stream.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/quaternion_stream.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/visualise/build/CMakeFiles 5
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/quaternion_stream.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/visualise/build/CMakeFiles 0
-.PHONY : CMakeFiles/quaternion_stream.dir/rule
-
-# Convenience name for target.
-quaternion_stream: CMakeFiles/quaternion_stream.dir/rule
-.PHONY : quaternion_stream
-
-# clean rule for target.
-CMakeFiles/quaternion_stream.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/quaternion_stream.dir/build.make CMakeFiles/quaternion_stream.dir/clean
-.PHONY : CMakeFiles/quaternion_stream.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/real_imu_stream.dir
-
-# All Build rule for target.
-CMakeFiles/real_imu_stream.dir/all: CMakeFiles/quaternion_lib.dir/all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/real_imu_stream.dir/build.make CMakeFiles/real_imu_stream.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/real_imu_stream.dir/build.make CMakeFiles/real_imu_stream.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/visualise/build/CMakeFiles --progress-num=9,10 "Built target real_imu_stream"
-.PHONY : CMakeFiles/real_imu_stream.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/real_imu_stream.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/visualise/build/CMakeFiles 5
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/real_imu_stream.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/visualise/build/CMakeFiles 0
-.PHONY : CMakeFiles/real_imu_stream.dir/rule
-
-# Convenience name for target.
-real_imu_stream: CMakeFiles/real_imu_stream.dir/rule
-.PHONY : real_imu_stream
-
-# clean rule for target.
-CMakeFiles/real_imu_stream.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/real_imu_stream.dir/build.make CMakeFiles/real_imu_stream.dir/clean
-.PHONY : CMakeFiles/real_imu_stream.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/quaternion_shared.dir

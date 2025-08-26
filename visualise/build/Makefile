@@ -130,45 +130,6 @@ quaternion_lib/fast:
 .PHONY : quaternion_lib/fast
 
 #=============================================================================
-# Target rules for targets named test1
-
-# Build rule for target.
-test1: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test1
-.PHONY : test1
-
-# fast build rule for target.
-test1/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test1.dir/build.make CMakeFiles/test1.dir/build
-.PHONY : test1/fast
-
-#=============================================================================
-# Target rules for targets named quaternion_stream
-
-# Build rule for target.
-quaternion_stream: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 quaternion_stream
-.PHONY : quaternion_stream
-
-# fast build rule for target.
-quaternion_stream/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/quaternion_stream.dir/build.make CMakeFiles/quaternion_stream.dir/build
-.PHONY : quaternion_stream/fast
-
-#=============================================================================
-# Target rules for targets named real_imu_stream
-
-# Build rule for target.
-real_imu_stream: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 real_imu_stream
-.PHONY : real_imu_stream
-
-# fast build rule for target.
-real_imu_stream/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/real_imu_stream.dir/build.make CMakeFiles/real_imu_stream.dir/build
-.PHONY : real_imu_stream/fast
-
-#=============================================================================
 # Target rules for targets named quaternion_shared
 
 # Build rule for target.
@@ -180,30 +141,6 @@ quaternion_shared: cmake_check_build_system
 quaternion_shared/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/quaternion_shared.dir/build.make CMakeFiles/quaternion_shared.dir/build
 .PHONY : quaternion_shared/fast
-
-dummy_stream.o: dummy_stream.c.o
-.PHONY : dummy_stream.o
-
-# target to build an object file
-dummy_stream.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/quaternion_stream.dir/build.make CMakeFiles/quaternion_stream.dir/dummy_stream.c.o
-.PHONY : dummy_stream.c.o
-
-dummy_stream.i: dummy_stream.c.i
-.PHONY : dummy_stream.i
-
-# target to preprocess a source file
-dummy_stream.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/quaternion_stream.dir/build.make CMakeFiles/quaternion_stream.dir/dummy_stream.c.i
-.PHONY : dummy_stream.c.i
-
-dummy_stream.s: dummy_stream.c.s
-.PHONY : dummy_stream.s
-
-# target to generate assembly for a file
-dummy_stream.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/quaternion_stream.dir/build.make CMakeFiles/quaternion_stream.dir/dummy_stream.c.s
-.PHONY : dummy_stream.c.s
 
 home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/src/complementary_filter.o: home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/src/complementary_filter.c.o
 .PHONY : home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/src/complementary_filter.o
@@ -259,54 +196,6 @@ home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filte
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/quaternion_shared.dir/build.make CMakeFiles/quaternion_shared.dir/home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/src/quaternion.c.s
 .PHONY : home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/src/quaternion.c.s
 
-real_imu_stream.o: real_imu_stream.c.o
-.PHONY : real_imu_stream.o
-
-# target to build an object file
-real_imu_stream.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/real_imu_stream.dir/build.make CMakeFiles/real_imu_stream.dir/real_imu_stream.c.o
-.PHONY : real_imu_stream.c.o
-
-real_imu_stream.i: real_imu_stream.c.i
-.PHONY : real_imu_stream.i
-
-# target to preprocess a source file
-real_imu_stream.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/real_imu_stream.dir/build.make CMakeFiles/real_imu_stream.dir/real_imu_stream.c.i
-.PHONY : real_imu_stream.c.i
-
-real_imu_stream.s: real_imu_stream.c.s
-.PHONY : real_imu_stream.s
-
-# target to generate assembly for a file
-real_imu_stream.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/real_imu_stream.dir/build.make CMakeFiles/real_imu_stream.dir/real_imu_stream.c.s
-.PHONY : real_imu_stream.c.s
-
-test1.o: test1.c.o
-.PHONY : test1.o
-
-# target to build an object file
-test1.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test1.dir/build.make CMakeFiles/test1.dir/test1.c.o
-.PHONY : test1.c.o
-
-test1.i: test1.c.i
-.PHONY : test1.i
-
-# target to preprocess a source file
-test1.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test1.dir/build.make CMakeFiles/test1.dir/test1.c.i
-.PHONY : test1.c.i
-
-test1.s: test1.c.s
-.PHONY : test1.s
-
-# target to generate assembly for a file
-test1.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test1.dir/build.make CMakeFiles/test1.dir/test1.c.s
-.PHONY : test1.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -317,24 +206,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... quaternion_lib"
 	@echo "... quaternion_shared"
-	@echo "... quaternion_stream"
-	@echo "... real_imu_stream"
-	@echo "... test1"
-	@echo "... dummy_stream.o"
-	@echo "... dummy_stream.i"
-	@echo "... dummy_stream.s"
 	@echo "... home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/src/complementary_filter.o"
 	@echo "... home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/src/complementary_filter.i"
 	@echo "... home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/src/complementary_filter.s"
 	@echo "... home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/src/quaternion.o"
 	@echo "... home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/src/quaternion.i"
 	@echo "... home/nanjundaradhyahy/Desktop/quaternion-CF/quaternion-based-complementary-filter-for-MPU6050-with-adaptive-gain/src/quaternion.s"
-	@echo "... real_imu_stream.o"
-	@echo "... real_imu_stream.i"
-	@echo "... real_imu_stream.s"
-	@echo "... test1.o"
-	@echo "... test1.i"
-	@echo "... test1.s"
 .PHONY : help
 
 
