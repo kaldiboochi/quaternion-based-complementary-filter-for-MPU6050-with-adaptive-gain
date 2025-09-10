@@ -11,7 +11,7 @@ void cf_update_from_gyro(struct quaternion* q, float r[3], float dt) {
     struct quaternion w, qd;
     quat_from_vec(r, &w);
     quat_multiply(&w, q, &qd);
-    quat_scale(-0.5f*dt, &qd, &qd);
+    quat_scale(-0.4f*dt, &qd, &qd);
     quat_add(q, &qd, q);
     quat_normalize(q);
 }
@@ -29,7 +29,7 @@ void cf_update_from_accel(struct quaternion* q, float a[3]) {
     quat_normalize(&da);
 
     float eps = quat_dot(&da, &(struct quaternion){1,0,0,0});
-    float alpha = (eps >= 0.9f ? 0.1f : cf_gain(fabsf(sqrtf(a[0]*a[0]+a[1]*a[1]+a[2]*a[2]) - CF_GRAVITY)/CF_GRAVITY)*0.1f);
+    float alpha =  cf_gain(fabsf(sqrtf(a[0]*a[0]+a[1]*a[1]+a[2]*a[2]) - CF_GRAVITY)/CF_GRAVITY)*0.08f;
 
     quat_scale(1-alpha, &(struct quaternion){1,0,0,0}, &A);
     quat_scale(alpha, &da, &B);
@@ -44,4 +44,3 @@ void cf_update(struct quaternion* q, float r[3], float a[3], float dt) {
     cf_update_from_gyro(q, r, dt);
     cf_update_from_accel(q, a);
 }
-
